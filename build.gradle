@@ -1,0 +1,33 @@
+}
+
+// Configure the distribution plugin
+distributions {
+    main {
+        contents {
+            from 'D:/pics/' // Replace 'src' with the directory you want to include in the ZIP file
+        }
+    }
+}
+
+// Configure the maven-publish plugin
+publishing {
+    publications {
+        main(MavenPublication) {
+            groupId 'com.tom' // Replace with your group ID
+            artifactId 'my-pics' // Replace with your artifact ID
+            version '1.0.0' // Replace with your version
+
+            artifact distZip
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/rma-tom/getAndPut") // Replace 'OWNER' and 'REPOSITORY' with your GitHub username and repository name
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GH_USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("GH_TOKEN")
+            }
+        }
+    }
+}
