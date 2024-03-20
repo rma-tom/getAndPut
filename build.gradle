@@ -25,8 +25,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/rma-tom/getAndPut") // Replace 'OWNER' and 'REPOSITORY' with your GitHub username and repository name
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("GH_USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("GH_TOKEN")
+                username = project.findProperty("gpr.user") ?: System.getenv("PKG_UID")
+                password = project.findProperty("gpr.key") ?: System.getenv("PKG_PWD")
             }
         }
     }
